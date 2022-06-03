@@ -6,5 +6,4 @@ numpy
 gevent
 librosa
 waitress
-os
 matplotlib
