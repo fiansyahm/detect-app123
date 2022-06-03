@@ -10,6 +10,7 @@ from tensorflow.keras.preprocessing.image import img_to_array
 from flask import Flask, request
 from flask import Flask
 from gevent.pywsgi import WSGIServer
+import waitress
 
 def get_spectrogram_and_label_id(audio_file, label):
     spectrogram = audio_file
@@ -97,9 +98,12 @@ def index():
     return "Selamat datang dimachine learning kami"
 
 if __name__ == '__main__':
+     app.debug = False
+     port = int(os.environ.get('PORT', 33507))
+     waitress.serve(app, port=port)
     # Debug/Development
     # app.run(debug=True, host="0.0.0.0", port="5000")
     # Production
-    http_server = WSGIServer(('127.0.0.1', 5000), app)
-    http_server.serve_forever()
+    #http_server = WSGIServer(('127.0.0.1', 5000), app)
+    #http_server.serve_forever()
 
